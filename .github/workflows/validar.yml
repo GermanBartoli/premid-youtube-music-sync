@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: PreMiD/Activities
-          ref: 240469a
+          ref: 240469a5bdbe794ded2e4bd98bf0b1240574510f
           path: upstream
           sparse-checkout: |
             @types
