@@ -1,0 +1,50 @@
+name: Validar actividad
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  compilar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener este repositorio
+        uses: actions/checkout@v4
+        with:
+          path: proyecto
+      - name: Obtener PreMiD Activities
+        uses: actions/checkout@v4
+        with:
+          repository: PreMiD/Activities
+          ref: 240469a
+          path: upstream
+          sparse-checkout: |
+            @types
+            cli
+            premid
+            websites/Y/YouTube Music
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Instalar CLI oficial
+        run: npm ci --prefix upstream/cli
+      - name: Compilar CLI oficial
+        run: npm run build --prefix upstream/cli
+      - name: Instalar dependencias de desarrollo
+        run: npm ci --ignore-scripts --prefix upstream
+      - name: Copiar la actividad
+        run: cp proyecto/activity/* 'upstream/websites/Y/YouTube Music/'
+      - name: Compilar y empaquetar
+        working-directory: upstream
+        run: node cli/dist/index.js build 'YouTube Music' --zip
+      - name: Comprobar ZIP
+        run: |
+          unzip -Z1 'upstream/websites/Y/YouTube Music/dist/YouTube Music.zip' | sort > contenido.txt
+          printf 'YouTube Music.json\nmetadata.json\npresence.js\n' > esperado.txt
+          diff -u esperado.txt contenido.txt
+      - name: Guardar ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-music-premid
+          path: upstream/websites/Y/YouTube Music/dist/YouTube Music.zip
