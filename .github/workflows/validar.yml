@@ -35,6 +35,13 @@ jobs:
         run: npm ci --ignore-scripts --prefix upstream
       - name: Copiar la actividad
         run: cp proyecto/activity/* 'upstream/websites/Y/YouTube Music/'
+      - name: Probar sincronización y miniaturas
+        run: |
+          mkdir -p upstream/activity upstream/tests
+          cp proyecto/activity/*.ts upstream/activity/
+          cp proyecto/tests/*.ts upstream/tests/
+          cd upstream
+          npx vitest run tests
       - name: Compilar y empaquetar
         working-directory: upstream
         run: node cli/dist/index.js build 'YouTube Music' --zip
