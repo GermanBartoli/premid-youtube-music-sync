@@ -16,34 +16,26 @@ export function updateSongTimestamps(
   dataGetter: MediaDataGetter,
 ): [number, number] {
   const video = dataGetter.getVideoElement()
+  const times = dataGetter.getCurrentAndTotalTime()
+  const current = times ? timestampFromFormat(times[0]) : Number.NaN
+  const duration = times ? timestampFromFormat(times[1]) : Number.NaN
+  const validTextTime = Number.isFinite(current) && Number.isFinite(duration)
+    && duration > 0 && current >= 0 && current <= duration + 1
+
   if (video && Number.isFinite(video.currentTime) && Number.isFinite(video.duration) && video.duration > 0) {
+    if (video.currentTime < 0 || video.currentTime > video.duration + 1)
+      return validTextTime ? getTimestamps(current, duration) : [0, 0]
+
+    if (validTextTime && Math.abs(video.duration - duration) > 2)
+      return getTimestamps(current, duration)
+
     return getTimestamps(video.currentTime, video.duration)
   }
 
-  const times = dataGetter.getCurrentAndTotalTime()
-
-  if (!times) {
-    return [0, 0]
-  }
-
-  const [currTimes, totalTimes] = times
-
-  if (currTimes && totalTimes) {
-    return getTimestamps(
-      timestampFromFormat(currTimes),
-      timestampFromFormat(totalTimes),
-    )
-  }
+  if (validTextTime)
+    return getTimestamps(current, duration)
 
   return [0, 0]
-}
-
-export function createMediaIdentifier(
-  title?: string,
-  artist?: string,
-  watchID?: string,
-): string {
-  return `${watchID || ''}|${title || ''}|${artist || ''}`
 }
 
 export async function getSettings(presence: Presence): Promise<Settings> {

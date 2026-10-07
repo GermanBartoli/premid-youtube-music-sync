@@ -34,7 +34,7 @@ export class YouTubeMusicDataGetter implements MediaDataGetter {
 
     const titleElement = document.querySelector('.ytmusicTrackInfoTitle, .title.ytmusic-player-bar')
     const artistElement = document.querySelector('.ytmusicTrackInfoByline a, .byline.ytmusic-player-bar a')
-    const thumbnailElement = document.querySelector<HTMLImageElement>('.ytmusicTrackInfoThumbnail, #song-image img, ytmusic-player-bar img#img')
+    const artwork = this.getArtwork()
 
     if (videoElement && Number.isFinite(videoElement.duration) && titleElement?.textContent?.trim()) {
       return {
@@ -42,7 +42,7 @@ export class YouTubeMusicDataGetter implements MediaDataGetter {
         title: titleElement.textContent.trim(),
         artist: artistElement?.textContent?.trim() || this.mediaSession?.metadata?.artist,
         album: this.mediaSession?.metadata?.album,
-        artwork: thumbnailElement?.src || this.mediaSession?.metadata?.artwork?.at(-1)?.src,
+        artwork: artwork || this.mediaSession?.metadata?.artwork?.at(-1)?.src,
         duration: videoElement.duration,
       }
     }
@@ -78,8 +78,16 @@ export class YouTubeMusicDataGetter implements MediaDataGetter {
       title: titleElement?.textContent?.trim() || undefined,
       artist: artistElement?.textContent?.trim() || undefined,
       album,
-      artwork: thumbnailElement?.src || undefined,
+      artwork,
       duration: videoElement?.duration,
+    }
+  }
+
+  private getArtwork(): string | undefined {
+    for (const selector of ['.ytmusicTrackInfoThumbnail', '#song-image img', 'ytmusic-player-bar img#img']) {
+      const src = document.querySelector<HTMLImageElement>(selector)?.src
+      if (src?.startsWith('https://') || src?.startsWith('http://'))
+        return src
     }
   }
 

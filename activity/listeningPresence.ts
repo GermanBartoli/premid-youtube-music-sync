@@ -86,7 +86,7 @@ export function createListeningPresence(
         : strings.playlistOnLoop
   }
 
-  if (showTimestamps && mediaData.playbackState === 'playing') {
+  if (showTimestamps && mediaData.playbackState === 'playing' && mediaTimestamps[1] > mediaTimestamps[0]) {
     presenceData.startTimestamp = mediaTimestamps[0]
     presenceData.endTimestamp = mediaTimestamps[1]
   }
