@@ -1,5 +1,12 @@
 # Verificaciones
 
+## v0.0.3
+
+- Actividad `3.4.7`; la carátula de la canción se prioriza sobre la miniatura pequeña y las URL de `yt3.googleusercontent.com` usan 544 × 544 píxeles.
+- Navegador: **Azúcar, Pimienta y Sal** mostró una carátula de 544 × 544 píxeles y variantes de 60 × 60 píxeles en la misma página.
+- `npx vitest run tests`: **9 pruebas correctas**, incluidas la carátula de la interfaz y la de Media Session.
+- Falta comprobar la imagen final en Discord con el ZIP v0.0.3 cargado en PreMiD; la resolución de origen puede limitar la nitidez.
+
 ## v0.0.2
 
 - Actividad `3.4.6` en `metadata.json`; ZIP `YouTube-Music-PreMiD-sincronizacion-v0.0.2.zip` generado con la CLI oficial para el release v0.0.2.

@@ -21,6 +21,7 @@ Las siguientes capturas muestran la interfaz de configuración de PreMiD usada c
 - Usa el tiempo visible si el video todavía conserva datos del tema anterior durante la transición.
 - Reconoce la pausa a partir del reproductor y obtiene el video actual en cada actualización aunque YouTube Music lo reemplace.
 - Ignora las imágenes transparentes del reproductor y usa la miniatura real del video.
+- Prefiere la carátula grande de cada canción y solicita 544 × 544 píxeles cuando YouTube Music entrega una variante pequeña.
 - Lee título, artista y carátula de la interfaz actual de YouTube Music, con compatibilidad con selectores anteriores.
 - Limpia la actividad cuando no hay reproducción y el ajuste **Show Browsing** está desactivado.
 
@@ -30,18 +31,18 @@ Se conservan los ajustes de PreMiD para privacidad, carátula, botones, navegaci
 
 [Discord documenta un máximo de 5 actualizaciones de actividad en 20 segundos para `UpdateActivity` del Game SDK](https://github.com/discord/discord-api-docs/blob/main/developers/developer-tools/game-sdk.mdx); también indica [5 cambios de estado de juego cada 20 segundos](https://github.com/discord/discord-api-docs/blob/main/developers/events/gateway-events.mdx). La [documentación de `SET_ACTIVITY`](https://github.com/discord/discord-api-docs/blob/main/developers/topics/rpc.mdx) no publica un cupo específico para el recorrido de PreMiD. Por eso, **5 cada 20 segundos es una referencia de Discord, no una medición confirmada del límite exacto de PreMiD**.
 
-La versión **v0.0.2** separa los envíos de `setActivity` al menos **4,1 segundos** y evita reenviar el mismo estado. Si cambiás varias canciones en ese intervalo, conserva la más reciente para el próximo envío: algunas canciones intermedias pueden no aparecer en Discord. YouTube Music puede cambiar de pista inmediatamente mientras el estado tarda unos segundos en reflejarlo.
+La versión **v0.0.3** separa los envíos de `setActivity` al menos **4,1 segundos** y evita reenviar el mismo estado. Si cambiás varias canciones en ese intervalo, conserva la más reciente para el próximo envío: algunas canciones intermedias pueden no aparecer en Discord. YouTube Music puede cambiar de pista inmediatamente mientras el estado tarda unos segundos en reflejarlo.
 
 ## Descarga e instalación
 
-Descargá el ZIP **`YouTube-Music-PreMiD-sincronizacion-v0.0.2.zip`** desde el [release v0.0.2](https://github.com/GermanBartoli/premid-youtube-music-sync/releases/tag/v0.0.2). El ZIP contiene la actividad **compilada**; no hay que descomprimirlo.
+Descargá el ZIP **`YouTube-Music-PreMiD-sincronizacion-v0.0.3.zip`** desde el [release v0.0.3](https://github.com/GermanBartoli/premid-youtube-music-sync/releases/tag/v0.0.3). El ZIP contiene la actividad **compilada**; no hay que descomprimirlo.
 
 1. Abrí la extensión de PreMiD y activá **Activity Developer Mode** en **Settings → Developer**.
 2. En **Developer**, elegí **Load Compiled Activity** y seleccioná el ZIP.
 3. Desactivá la actividad oficial de YouTube Music si ambas aparecen activas para el mismo sitio.
 4. Abrí o recargá [music.youtube.com](https://music.youtube.com/), reproducí una canción y comprobá el estado en Discord.
 
-La [guía de carga de PreMiD](https://docs.premid.app/v1/guide/loading-activities.html) explica este flujo. Necesitás la extensión de PreMiD y Discord de escritorio. **v0.0.2** es la versión publicada aquí y contiene la actividad **3.4.6**.
+La [guía de carga de PreMiD](https://docs.premid.app/v1/guide/loading-activities.html) explica este flujo. Necesitás la extensión de PreMiD y Discord de escritorio. **v0.0.3** es la versión publicada aquí y contiene la actividad **3.4.7**.
 
 ## Estructura
 
@@ -68,7 +69,7 @@ El flujo automatizado en [`.github/workflows/validar.yml`](.github/workflows/val
 
 ## Límites y privacidad
 
-La actividad depende del DOM y del reproductor de YouTube Music; un cambio de su interfaz puede requerir otra actualización. La v0.0.2 se compiló y se probaron cinco pistas seguidas en el navegador. **Todavía no se verificó el estado final en Discord con el ZIP v0.0.2 cargado en PreMiD.**
+La actividad depende del DOM y del reproductor de YouTube Music; un cambio de su interfaz puede requerir otra actualización. Se verificó la URL de 544 × 544 píxeles de una canción real y se probaron los casos de miniaturas. La nitidez también depende de la calidad de la imagen original. **Todavía no se verificó el estado final en Discord con el ZIP v0.0.3 cargado en PreMiD.**
 
 El código de la actividad lee información de la pestaña de YouTube Music para que PreMiD muestre el estado en Discord. No incluye servidor propio, telemetría ni credenciales. Los botones y enlaces llevan a YouTube Music cuando están habilitados.
 
