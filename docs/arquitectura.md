@@ -26,7 +26,7 @@ Antes de llamar a `setActivity`, `presence.ts` descarta estados repetidos y sepa
 
 `listeningPresence.ts` aplica las preferencias de PreMiD al estado musical. `browsingPresence.ts` muestra navegación cuando está habilitada y no hay reproducción.
 
-`dataGetter.ts` descarta las imágenes transparentes del reproductor y elige la miniatura real del tema o video.
+`dataGetter.ts` descarta las imágenes transparentes del reproductor, prioriza la carátula grande de la canción y amplía las variantes pequeñas de `yt3.googleusercontent.com` a 544 × 544 píxeles.
 
 ## Dependencias
 

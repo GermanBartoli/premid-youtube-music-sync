@@ -19,6 +19,13 @@ export interface MediaDataGetter {
   isPlaying: () => boolean
 }
 
+function getLargeArtwork(src?: string): string | undefined {
+  if (!src)
+    return undefined
+
+  return src.replace(/(https?:\/\/yt3\.googleusercontent\.com\/[^?\s]*=)w\d+-h\d+/, '$1w544-h544')
+}
+
 export class YouTubeMusicDataGetter implements MediaDataGetter {
   private mediaSession: MediaSession | undefined
 
@@ -42,7 +49,7 @@ export class YouTubeMusicDataGetter implements MediaDataGetter {
         title: titleElement.textContent.trim(),
         artist: artistElement?.textContent?.trim() || this.mediaSession?.metadata?.artist,
         album: this.mediaSession?.metadata?.album,
-        artwork: artwork || this.mediaSession?.metadata?.artwork?.at(-1)?.src,
+        artwork: artwork || getLargeArtwork(this.mediaSession?.metadata?.artwork?.at(-1)?.src),
         duration: videoElement.duration,
       }
     }
@@ -53,7 +60,7 @@ export class YouTubeMusicDataGetter implements MediaDataGetter {
         title: this.mediaSession.metadata.title,
         artist: this.mediaSession.metadata.artist,
         album: this.mediaSession.metadata.album,
-        artwork: this.mediaSession.metadata.artwork?.at(-1)?.src,
+        artwork: getLargeArtwork(this.mediaSession.metadata.artwork?.at(-1)?.src),
       }
     }
 
@@ -84,10 +91,10 @@ export class YouTubeMusicDataGetter implements MediaDataGetter {
   }
 
   private getArtwork(): string | undefined {
-    for (const selector of ['.ytmusicTrackInfoThumbnail', '#song-image img', 'ytmusic-player-bar img#img']) {
+    for (const selector of ['#song-image img', '.ytmusicTrackInfoThumbnail', 'ytmusic-player-bar img#img']) {
       const src = document.querySelector<HTMLImageElement>(selector)?.src
       if (src?.startsWith('https://') || src?.startsWith('http://'))
-        return src
+        return getLargeArtwork(src)
     }
   }
 
