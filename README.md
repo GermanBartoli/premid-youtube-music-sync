@@ -1,4 +1,21 @@
-# YouTube Music Sync para PreMiD
+# YouTube Music Sync · PreMiD
+
+**Actividad para mantener el estado de Discord sincronizado con los cambios de canción de YouTube Music.**
+
+[![Repositorio](https://img.shields.io/badge/GitHub-GermanBartoli-181717?logo=github)](https://github.com/GermanBartoli/premid-youtube-music-sync)
+[![Verificaciones](https://github.com/GermanBartoli/premid-youtube-music-sync/actions/workflows/validar.yml/badge.svg)](https://github.com/GermanBartoli/premid-youtube-music-sync/actions/workflows/validar.yml)
+
+[Descargas](https://github.com/GermanBartoli/premid-youtube-music-sync/releases) · [Empezar](#primeros-pasos) · [Mapa del repositorio](#mapa-del-repositorio) · [Autoría](#autoría-de-esta-documentación)
+
+![Vista del proyecto: YouTube Music Sync · PreMiD](docs/media/premid-actividad.png)
+
+## Primeros pasos
+
+1. Descargá el ZIP compilado indicado en Descarga e instalación.
+2. Cargalo en **Activity Developer Mode → Load Compiled Activity** de PreMiD y desactivá la actividad oficial duplicada.
+3. Reproducí una canción y probá el cambio de pista. Los cambios rápidos conservan la pista más reciente y pueden tardar unos segundos en reflejarse.
+
+## Referencia y detalles
 
 Actividad comunitaria para mostrar en Discord la canción que estás escuchando en [YouTube Music](https://music.youtube.com/) mediante [PreMiD](https://premid.app/). Este repositorio adapta la actividad oficial **YouTube Music** de PreMiD para corregir problemas de sincronización observados en la versión 3.4.1.
 
@@ -76,3 +93,16 @@ El código de la actividad lee información de la pestaña de YouTube Music para
 ## Licencia y créditos
 
 Basado en la [actividad YouTube Music de PreMiD](https://github.com/PreMiD/Activities/tree/main/websites/Y/YouTube%20Music), cuyo autor original figura en `activity/metadata.json`. Se conserva la licencia [Mozilla Public License 2.0](LICENSE) y se detallan los cambios y créditos en [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+## Mapa del repositorio
+
+- [CONTRIBUTING.md](<CONTRIBUTING.md>)
+- [LICENSE](<LICENSE>)
+- [docs/arquitectura.md](<docs/arquitectura.md>)
+- [docs/verificacion.md](<docs/verificacion.md>)
+
+## Autoría de esta documentación
+
+Repositorio mantenido por [Germán Bartoli](https://github.com/GermanBartoli). Guía revisada y actualizada con **Codex**, coautor de esta actualización documental. Los autores, colaboradores, licencias y recursos de terceros conservan sus créditos originales.
+
+Los commits de esta revisión incluyen `Co-authored-by: Codex <noreply@openai.com>`; esta atribución no modifica la autoría del historial anterior.
