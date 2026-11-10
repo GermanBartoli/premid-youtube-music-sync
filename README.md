@@ -7,8 +7,6 @@
 
 [Descargas](https://github.com/GermanBartoli/premid-youtube-music-sync/releases) · [Empezar](#primeros-pasos) · [Mapa del repositorio](#mapa-del-repositorio) · [Autoría](#autoría-de-esta-documentación)
 
-![Vista del proyecto: YouTube Music Sync · PreMiD](docs/media/premid-actividad.png)
-
 ## Primeros pasos
 
 1. Descargá el ZIP compilado indicado en Descarga e instalación.
