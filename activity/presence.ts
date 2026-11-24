@@ -157,6 +157,9 @@ async function updateActivity() {
     return clearActivity()
   }
 
+  if (!settings.showButtons)
+    delete presenceData.buttons
+
   publishActivity(presenceData)
 }
 
