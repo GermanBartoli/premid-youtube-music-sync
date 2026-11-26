@@ -50,7 +50,7 @@ La versión **v0.0.3** separa los envíos de `setActivity` al menos **4,1 segund
 
 ## Descarga e instalación
 
-Descargá el ZIP **`YouTube-Music-PreMiD-sincronizacion-v0.0.3.zip`** desde el [release v0.0.3](https://github.com/GermanBartoli/premid-youtube-music-sync/releases/tag/v0.0.3). El ZIP contiene la actividad **compilada**; no hay que descomprimirlo.
+Descargá el ZIP **`YouTube.Music.zip`** desde el [último release](https://github.com/GermanBartoli/premid-youtube-music-sync/releases/latest). El ZIP contiene la actividad **compilada**; no hay que descomprimirlo.
 
 1. Abrí la extensión de PreMiD y activá **Activity Developer Mode** en **Settings → Developer**.
 2. En **Developer**, elegí **Load Compiled Activity** y seleccioná el ZIP.
